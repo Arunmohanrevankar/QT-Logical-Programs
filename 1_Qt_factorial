@@ -1,0 +1,28 @@
+from PyQt5.QtWidgets import QWidget,QApplication,QPushButton,QLineEdit,QLabel
+import sys
+
+def fact_c():
+    num1 = float(le_1.text())
+    fact = 1
+    while num1>1:
+        fact*=num1
+        num1-=1
+        le_2.setText(str(round(fact,2)))
+
+app = QApplication(sys.argv)
+win = QWidget()
+win.resize(450,100)
+win.setWindowTitle("Factorial Calculator Application")
+lb_1 = QLabel("Enter The Integer :",win)
+lb_1.setGeometry(10,10,100,25)
+le_1 = QLineEdit(win)
+le_1.setGeometry(140,10,300,25)
+pb_1 = QPushButton("Factorial:",win)
+pb_1.setGeometry(10,40,100,25)
+pb_1.clicked.connect(fact_c)
+le_2 = QLineEdit(win)
+le_2.setGeometry(140,40,300,25)
+
+win.show()
+sys.exit(app.exec())
+
