@@ -1,0 +1,50 @@
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel
+import sys
+
+
+class ListInputApp(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.init_ui()
+
+    def init_ui(self):
+        layout = QVBoxLayout()
+
+        # QLineEdit for list-style input
+        self.input_field = QLineEdit()
+        self.input_field.setPlaceholderText("Enter items like [a,b,c,d]")
+        layout.addWidget(self.input_field)
+
+        # Button to process input
+        self.submit_button = QPushButton("Get Length")
+        self.submit_button.clicked.connect(self.process_input)
+        layout.addWidget(self.submit_button)
+
+        # Label to show result
+        self.result_label = QLabel("")
+        layout.addWidget(self.result_label)
+
+        self.setLayout(layout)
+        self.setWindowTitle("List Input Length")
+
+    def process_input(self):
+        text = self.input_field.text().strip()
+
+        # Basic cleanup to remove brackets and split by comma
+        if text.startswith("[") and text.endswith("]"):
+            stripped = text[1:-1].strip()
+            if stripped:
+                items = [item.strip() for item in stripped.split(',')]
+                length = len(items)
+                print(f"Indexed itemes :{items[0]} :{items[3]}")
+                self.result_label.setText(f"List: {items}\nLength: {length}")
+                return
+
+        self.result_label.setText("Please enter a valid list like [a,b,c,d]")
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = ListInputApp()
+    window.show()
+    sys.exit(app.exec_())
