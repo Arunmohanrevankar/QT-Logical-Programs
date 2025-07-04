@@ -1,0 +1,31 @@
+from PyQt5.QtWidgets import QLabel,QWidget,QApplication,QPushButton,QLineEdit
+import sys
+
+def sort():
+    string = le_1.text()
+    x = [item.strip() for item in string.split(',') if item.strip().isdigit()]
+    numbers = list(map(int, x))
+    input_length = len(numbers)
+    for i in range(input_length):
+        for j in range(0,input_length-i-1):
+            if numbers[j]< numbers[j+1]:
+                numbers[j + 1] , numbers[j] = numbers[j], numbers[j + 1]
+    le_2.setText(str(numbers))
+
+app = QApplication(sys.argv)
+win = QWidget()
+win.resize(500,500)
+win.setWindowTitle("Sorting The list in Ascending Order Application")
+lb_1 = QLabel("List =",win)
+lb_1.setGeometry(10,10,100,25)
+pb_1 = QPushButton("Sort List",win)
+pb_1.setGeometry(10,40,100,25)
+pb_1.clicked.connect(sort)
+le_1 = QLineEdit(win)
+le_1.setGeometry(120,10,300,25)
+le_2 = QLineEdit(win)
+le_2.setGeometry(120,40,300,25)
+win.show()
+sys.exit(app.exec())
+
+
